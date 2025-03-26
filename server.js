@@ -19,9 +19,8 @@ const dbUrl = process.env.DATABASE.replace(
 
 mongoose
   .connect(dbUrl, {
-    serverSelectionTimeoutMS: 5000,
-    tlsAllowInvalidCertificates: true,
     useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
   .then(() => {
     console.log("DB connection succesfully");
