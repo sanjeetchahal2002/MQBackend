@@ -9,11 +9,18 @@ exports.signUp = async (req, res) => {
       throw new Error("User already exists with this email!");
     }
 
-    await User.create({ name, email, password, confirmPassword });
+    const user = await User.create({ name, email, password, confirmPassword });
 
-    res
-      .status(200)
-      .json({ success: 1, message: "User registered successfully!" });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.status(200).json({
+      success: 1,
+      message: "User registered successfully!",
+      userData: { name: user.name },
+      token,
+    });
   } catch (err) {
     res.status(400).json({
       success: 0,
