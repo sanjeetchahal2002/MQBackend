@@ -9,7 +9,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://mq-frontend-i9g8f4fjo-sanjeetchahal2002s-projects.vercel.app",
+    ],
     credentials: true,
   })
 );
